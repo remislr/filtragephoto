@@ -1,0 +1,317 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<link type="text/css" rel="stylesheet" href="stylesheet.css" >
+    <title>Filtrage Photos</title> 
+  </head>
+   
+  <!--getValue()permet récupérer la taille "h" image definie par utilisateur,limitee à 600 px-->
+<script>
+var h = 700;
+function getValue() {
+    h = document.getElementById("in").value;
+/*pour modifier taille image meme sur la photo par défaut, on crée sur élément "new" une variable "carImg"*/
+	var carImg = document.getElementById("new");
+	
+/*on lui donne la valeur "h" qui est à 700 px mais qu'on peut modifier comme images importées*/
+		carImg.width = h;
+		
+/*on limite la taille image à 700px*/		
+	if (h>700) alert ("trop élevée");
+	
+}
+</script>
+ <body>  
+    <section>
+		<article> 
+			<div style="padding:3px;">
+				<h1> Palette et Vignettes</h1>
+		
+				<p><b>Sur palette : </b><br>8 zones cliquables pour 8 vignettes<br>1 filtre par vignette <br>1 click sur zone -> 1(vignette + 1 filtre)<br>1 autre click -> réinitialise filtre<br>souris sur vignette -> autre image</p>		
+			</div>
+
+<!--8 zones cliquables sur la palette de couleurs sont faites avec Gimp, le code map est ici. Chaque area declenche une fonction JS (changeVignette)et un parametre qui depend de la zone mais qui sert au choix de la vignette et du filtre qui va avec -->
+		
+			<div>
+				<img src="Palette-1.jpg" width="300" height="239" border="0" usemap="#image-map" />
+				<map name="image-map">
+				<area shape="circle" coords="115,186,15" href='javascript:changeVignette("20")'/>
+				<area shape="circle" coords="62,166,18" href='javascript:changeVignette("30")'/>
+				<area shape="circle" coords="41,124,19" href='javascript:changeVignette("40")'/>
+				<area shape="circle" coords="60,84,13" href='javascript:changeVignette("50")'/>
+				<area shape="circle" coords="92,50,16" href='javascript:changeVignette("60")'/>
+				<area shape="circle" coords="145,34,17" href='javascript:changeVignette("70")'/>			
+				<area shape="circle" coords="204,39,17" href='javascript:changeVignette("80")'/>
+				<area shape="circle" coords="250,71,15" href='javascript:changeVignette("90")'/>
+				</map>
+			</div>		
+			<div>
+<!--les boutons	donnent un parametre "choix" pour la fonction "changeClass" .ilmodifie la classe de " img" qui a pour "Id = new". c'est image importée-->
+				<h1>Filtres et image importée</h1>
+				<button onclick="changeClass('2')">Lumi +</button>
+				<button onclick="changeClass('3')">Lumi ++</button>
+				<button onclick="changeClass('4')">Cont 0</button>
+				<button onclick="changeClass('5')">Cont +</button>
+				<button onclick="changeClass('6')">Cont ++</button>
+				<button onclick="changeClass('7')">Gris 0</button>
+				<button onclick="changeClass('8')">Gris +</button>
+				<button onclick="changeClass('9')">Gris ++</button>			
+				<button onclick="changeClass('10')">Opacité</button>
+				<button onclick="changeClass('11')">Sépia</button>
+				<button onclick="changeClass('12')">Saturation</button>
+				<button onclick="changeClass('13')">Inversion</button> 
+				<button onclick="changeClass('1')">Lumi + opac</button>
+			</div>       
+	</article>
+
+	<article>    
+		<div class="titre"  >Des photos et des filtres</div>		
+		<div>
+<!--on utilise "placeholder associé à "input" pour entrer la taille image "h"-->		
+			<input type="text" placeholder="Image =< 700 px" id="in">
+			
+<!--le bouton sert àdéclencher "getValue() pour saisir la taille "h"-->			
+			<button class="bouton" onclick="getValue();">Validez la taille</button><br><br>
+			
+<!--accès par "input" et type (file) aux fichiers utilisateur, on masque le "input" et on associe un "label" plus beau. On déclenche par click la fonction "import" qui importera le fichier choisi sur ordi utilisateur-->
+			<input type="file" id="fileElem" accept="image/*" style ="display:none" onchange = "importFileandPreview(h)"><label for = "fileElem">Importer votre image</label>
+			
+			<button class="mybouton" onclick="telecharge()">Téléchargement</button>
+<!--			<form>
+				<input type="button" display="none" value="Telechargement" onclick="telecharge()">
+				</form>	-->
+				
+		</div>
+		
+<!--photos importée	se placeront ici, "Id new" servira à la fonction "changeClass", la class "lst" à identifier element pour le fichier importé. On applique sur image par la classe "frame" un cadre (voir css)-->			
+		<div class="frame">
+			<img id="new" class="lst" src="phototest.jpg"  width="700" height="auto" border="0"
+		</div>
+	</article>
+	<article>
+
+<!--une partie des vignettes avec intitule, avec meme classe pour toutes au départ, passage de souris pour voir effet avec même filtre sur autre vignette. On donne "id"  à chacune pour associer un filtre dans la fonction "changeVignette(idee)".
+la classe servira à définir le filtre pour "(idee)" choisi-->
+
+		<div>
+<!--les vignettes avec leur intitulé pour associer avec les zones de la palette, changement de vue avec la souris-->		
+			<figcaption>Touche blanche   Lumi ++</figcaption>
+			<img id="one"src="Bresil.jpg" class="lumi2" width="200" style="margin:5px" onmouseover='this.src="image-12.jpg";'onmouseout='this.src="Bresil.jpg";'/>
+			<figcaption>Touche noire   Gris ++</figcaption>
+			<img id="two"src="coyote.jpg"  class="lumi2" width="200" style="margin:5px" onmouseover='this.src="image-11.jpg";'onmouseout='this.src="coyote.jpg";'/> 
+			<figcaption>Touche violet   Sepia</figcaption>
+			<img id="three" src="Bolivie.jpg" class="lumi2" width="200" style="margin:5px" onmouseover='this.src="Acatama.jpg";'onmouseout='this.src="Bolivie.jpg";'/>
+			<figcaption>Touche bleu   Inver</figcaption>
+			<img id="four" src="image-1.jpg" class="lumi2" width="200" style="margin:5px" onmouseover='this.src="image-2.jpg";'onmouseout='this.src="image-1.jpg";'/>
+		</div>		
+			
+	</article>
+
+	<article>
+        <div>
+			<figcaption>Touche verte   Satur</figcaption>
+			<img id="five"src="image-3.jpg" class="lumi2" width="200" style="margin:5px" onmouseover='this.src="image-4.jpg";'onmouseout='this.src="image-3.jpg";'/>
+			<figcaption>Touche jaune   Opac</figcaption>
+			<img id="six"src="image-5.jpg"  class="lumi2" width="200" style="margin:5px" onmouseover='this.src="image-6.jpg";'onmouseout='this.src="image-5.jpg";'/> 
+			<figcaption>Touche orange   Hue</figcaption>
+			<img id="seven" src="image-7.jpg" class="lumi2" width="200" style="margin:5px" onmouseover='this.src="image-8.jpg";'onmouseout='this.src="image-7.jpg";'/>
+			<figcaption>Touche rouge   Gris ++</figcaption>
+			<img id="eight" src="image-9.jpg" class="lumi2" width="200" style="margin:5px" onmouseover='this.src="image-10.jpg";'onmouseout='this.src="image-9.jpg";'/>		
+        </div>
+	</article>
+</section>
+
+<!--code pour uploader image depuis ordi.la fonction passe taille image, la valeur de "h" defini par utilisateur dans "getValue()"-->
+<script> 
+var adr = https://remislr.github.io/photosetfiltres/phototest.jpg ;
+window.URL = window.URL || window.webkitURL;
+
+/* fonction qui traite importation avec passage de la taille "h" image créé par "getValue()"*/
+function importFileandPreview(h) {
+
+/* retour du 1er élément de "lst"*/
+  var preview = document.querySelector('.lst');
+  
+/* retour du 1er fichier choisi suite accès à ordi utilsateur par l'élément "input" */
+  var file = document.querySelector('input[type=file]').files[0];
+  
+/* creation URL qui représente l'objet file*/  
+  preview.src = window.URL.createObjectURL(file);
+  adr = preview.src;
+  
+/* element renvoyé est celui qui a pour  "Id new" avec image par defaut plus haut*/
+largeur= document.getElementById('new');
+
+/* la largeur peut avoir un attribut "width"  et on lui met "h"*/
+largeur.width = h;
+
+/*il est conseillé de libérer de la mémoire en effaçant "URL" créé plus haut*/
+    window.URL.revokeObjectURL(this.src);
+}
+</script>
+ 
+<!--le "choix" désigne par comparaison avec "case" du switch et quelle filtre on met sur image téléchargee. le code "lumopac" associe 2 filtres, brightness et opacity-->
+
+<script>  
+function changeClass(choix)
+{
+/* "Id new" est l'image importée et "break" sert à sortir de la boucle si le "choix" correspond à "case"*/
+	switch (choix) {
+		case '1': 
+			document.getElementById('new').className = "lumopac";	
+			break;
+		case '2':
+			document.getElementById('new').className = "lumi2";
+			break;
+		case '3': 
+			document.getElementById('new').className = "lumi3";
+			break;
+		case '4': 
+			document.getElementById('new').className = "cont1";
+			break;
+		case '5':
+			document.getElementById('new').className ="cont2";
+			break;
+		case '6':
+			document.getElementById('new').className ="cont3";
+			break;
+		case '7': 
+			document.getElementById('new').className ="gris1";
+			break;			
+		case '8': 
+			document.getElementById('new').className ="gris2";
+			break;
+		case '9':
+			document.getElementById('new').className ="gris3";
+			break;
+		case '10': 
+			document.getElementById('new').className ="opa";
+			break;	
+		case '11': 
+			document.getElementById('new').className ="sep";
+			break;
+		case '12':
+			document.getElementById('new').className ="satur";
+			break;
+		case '13': 
+			document.getElementById('new').className ="inver";
+			break;
+	}
+}
+</script>
+
+<script>
+
+<!-- la fonction changeVignette() transmet (id) demandé par la palette (zone cliquable)pour lui mettre un filtre On met une variable (cond) qui changera de valeur à chaque passage dans le "switch".On revient à la vignette initiale, au filtre lumi2, donc à image non retouché-->
+var cond=1;
+function changeVignette(idee)
+{
+	switch (idee) { 
+		case '20':
+			if (cond==0){		
+				document.getElementById('one').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('one').className = "lumi3"
+				cond=0;}
+			break;		
+		case '30':
+			if (cond==0){		
+				document.getElementById('two').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('two').className = "gris3"
+				cond=0;}
+			break;
+		case '40':
+			if (cond==0){		
+				document.getElementById('three').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('three').className = "sep"
+				cond=0;}	
+			break;
+		case '50':
+			if (cond==0){		
+				document.getElementById('four').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('four').className = "inver"
+				cond=0;}
+			break;	
+		case '60':
+			if (cond==0){		
+				document.getElementById('five').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('five').className = "satur"
+				cond=0;}
+			break;	
+		case '70':
+			if (cond==0){		
+				document.getElementById('six').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('six').className = "opa"
+				cond=0;}
+			break;		
+		case '80':
+			if (cond==0){		
+				document.getElementById('seven').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('seven').className = "huerot";
+				cond=0;}
+			break;					
+		case '90':
+			if (cond==0){		
+				document.getElementById('eight').className = "lumi2";
+				cond=1;}
+			else {				
+				document.getElementById('eight').className = "gris3"
+				cond=0;}
+			break;			
+		}
+}
+</script>
+<script>
+/*utiliser balise ancre <a href="" /> non liée au DOM, donc ne fait pas partie de la structure HTML du projet mais existe (fonction importFile, preview.src=adr)comme objet JavaScript*/
+function telecharge()
+{
+var name="fichier tele";
+  const anchor = document.createElement('a')
+  anchor.href = adr;
+/*on attribue un nom au fichier créé par téléchargement*/  
+  anchor.download = name;
+/*le telechargement se fait */  
+  anchor.click();
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+

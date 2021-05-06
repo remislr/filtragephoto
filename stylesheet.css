@@ -1,0 +1,170 @@
+﻿  
+
+body 	{
+    margin: 0;
+	font-family: cursive;
+	}
+.frame 	{
+      border: 3px solid #d87c68;
+      background: #eee; 
+      margin: auto;
+      padding: 15px 15px;
+	}      
+.titre	{
+	background-color : orange;
+	height : 50px;
+	text-align: center;
+	font-size: 30px;
+	} 	  
+label:hover{
+	color : red;
+	background-color : white;
+	}
+label 	{ 
+	font-size : 20px;		
+	font-color : black;
+	font-weight:bold;
+	cursor : pointer;
+	margin-left : 50px;
+		}
+.soutitre	{
+	background-color : rose;
+	height : 15px;
+	}	
+input::placeholder {
+	color: red;
+	font-size : 15px;
+	font-weight : bold;	
+	}
+span  		{
+	font-size : 25px;
+	margin :	50px
+	}
+h1 		{
+	text-align: center;
+	line-height: 50px;
+	margin: 0;
+    }	  
+h2 a 	{
+	margin: 150px;
+	}	    
+article {
+	padding: 5px;
+	margin: 5px;
+	background: #BBD2E1;
+    }
+section {
+	display: flex;
+	height : 750px;		 
+      }	  
+article:nth-of-type(1) {
+	flex: 1 100px;       
+    }
+article:nth-of-type(2) {
+	flex: 7 500px;
+	display: flex;
+    flex-flow: column;				
+	}	
+article:nth-of-type(3) {
+	flex: 1 100px;  
+    }
+article:nth-of-type(4) {
+	flex: 1 100px;
+    display: flex;
+	}
+.bouton		{
+	margin-left : 30px;
+	cursor : pointer;
+	font-size : 20px;
+	font-weight : bold;
+	font-family: cursive;
+	}	
+.mybouton	{
+	margin-left : 300px;
+	cursor : pointer;
+	font-size : 20px;
+	font-weight : bold;
+	font-family: cursive;
+	}
+button:hover {
+	background-color: red;
+	cursor : pointer;
+	color : white;
+	}
+button 	{
+	flex: 1 auto;
+	margin: 5px;
+	font-size: 15px;
+	line-height: 1.5;
+    }
+a 		{
+	text-decoration : none;
+	margin-left :	320px;
+	font-size : 20px;
+	}
+a:hover {
+	color : red;
+	  }
+img 	{
+	display:block;
+	margin :auto;
+	}
+.lumopac {
+	filter : brightness(150%) opacity(50%);
+	height : auto;
+	}
+.lumi2	{	
+	filter : brightness(100%);
+	height : auto;
+	}
+.lumi3 	{
+	filter : brightness(150%);
+	height:  auto;
+	}
+.contr1 {
+	filter : contrast(0.5);
+	height : auto;
+	}
+.contr2	{
+	filter: contrast(2);
+	height: auto;
+	}
+.contr3 {
+	filter: contrast(1.75);
+	height: auto;
+	}
+.gris1 {
+	filter : grayscale(20%);
+	height: auto;
+	}
+.gris2 	{
+	filter : grayscale(50%);
+	height : auto;
+	}
+.gris3	{
+	filter : grayscale(120%);
+	height : auto;
+	}
+.inver	{
+	filter : invert(100%);
+	height : auto;	
+	}	
+.opa 	{
+	filter : opacity(50%);	
+	height : auto;
+	}
+.satur {
+	filter : saturate(5);
+	height : auto;
+	}	 
+.sep 	{
+	filter: sepia(100%);	
+	height: auto;
+	}
+.huerot {
+	filter:	hue-rotate(90deg);
+	}
+.blur 	{
+	filter : blur(5px);
+	height : auto;
+	}
